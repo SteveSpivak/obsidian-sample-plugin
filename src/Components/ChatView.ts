@@ -139,8 +139,9 @@ export class ChatView extends ItemView {
   private async fetchAIResponse(message: string): Promise<string> {
     this.showLoadingIndicator(); // Show loading indicator
     const payload = {
+      model: 'qwen2.5-coder:latest',  // Specify the model here
       prompt: message,
-      max_tokens: 150, // Adjust as needed
+      max_tokens: 150,  // Adjust as needed
     };
 
     const response = await axios.post<Response>(this.apiUrl, payload, {
