@@ -1,5 +1,12 @@
+// src/Components/ChatView.ts
+
 import { ItemView, WorkspaceLeaf, Notice, MarkdownView, MarkdownRenderer } from 'obsidian';
 import axios from 'axios';
+
+interface LocalOllamaSettings {
+  ollamaApiUrl: string;
+  model: string; // Add the model property
+}
 
 export const VIEW_TYPE_CHAT = 'chat-view';
 
@@ -13,10 +20,14 @@ export class ChatView extends ItemView {
   private sendButton!: HTMLButtonElement;
   private messagesEl!: HTMLElement;
   private apiUrl: string;
+  private settings: LocalOllamaSettings;
 
-  constructor(leaf: WorkspaceLeaf, settings: ChatViewSettings) {
+  constructor(leaf: WorkspaceLeaf, settings: LocalOllamaSettings) {
     super(leaf);
     this.apiUrl = settings.ollamaApiUrl;
+    this.leaf = leaf;
+
+    this.settings = settings;
   }
 
   getViewType(): string {
@@ -74,13 +85,24 @@ export class ChatView extends ItemView {
     // Show loading indicator
     this.addMessage('AI', '...');
 
+    // Define payload
+    const payload = {
+      model: 'qwen2.5-coder:latest',  // Specify the model here
+      prompt: message,
+      max_tokens: 150,  // Adjust as needed
+    };
+
     // Scroll to bottom
     this.messagesEl.scrollTop = this.messagesEl.scrollHeight;
 
     // Send message to Ollama and display response
     try {
-      const response = await this.fetchAIResponse(message);
-      this.updateLastAIMessage(response);
+      const response = await axios.post(`${this.apiUrl}/v1/chat`, payload, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      this.updateLastAIMessage(response.data as string);
     } catch (error) {
       console.error('Error fetching AI response:', error);
       this.updateLastAIMessage('Sorry, there was an error processing your request.');
