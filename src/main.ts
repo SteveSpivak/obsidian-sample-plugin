@@ -1,5 +1,5 @@
 import { Plugin, WorkspaceLeaf, Notice } from 'obsidian';
-import ChatView from './Components/ChatView';
+import { ChatView } from './Components/ChatView';
 import { DEFAULT_OLLLAMA_SETTINGS, OllamaSettings } from './Settings/OllamaSettings';
 import { VIEW_TYPE_CHAT } from './Constants/constants';
 import ChatSettingsTab from './Settings/ChatSettingsTab';
@@ -17,7 +17,7 @@ export default class OllamaChatPlugin extends Plugin {
     this.registerView(VIEW_TYPE_CHAT, (leaf: WorkspaceLeaf) => new ChatView(leaf, this.settings));
 
     // Add a ribbon icon to open the Chat View
-    this.addRibbonIcon('robot', 'Open Ollama Chat', async (evt: MouseEvent) => {
+    this.addRibbonIcon('robot', 'Open Ollama Chat', async () => {
       await this.activateChatView();
     });
 
