@@ -8,21 +8,21 @@ Develop an Obsidian plugin that integrates a chat interface within Obsidian, con
 ## **Key Features**
 
 1. **Chat UI Integration:**
-   - A sidebar panel within Obsidian displaying the chat interface.
-   - Input field for user queries.
-   - Display area for AI responses.
+    - A sidebar panel within Obsidian displaying the chat interface.
+    - Input field for user queries.
+    - Display area for AI responses.
 
 2. **Local AI Connection:**
-   - Connects to a locally running Ollama instance via HTTP API.
-   - Sends user queries to Ollama and retrieves responses.
+    - Connects to a locally running Ollama instance via HTTP API.
+    - Sends user queries to Ollama and retrieves responses.
 
 3. **Seamless Interaction:**
-   - Users can send messages and receive responses without leaving Obsidian.
-   - Support for Markdown formatting in AI responses.
+    - Users can send messages and receive responses without leaving Obsidian.
+    - Support for Markdown formatting in AI responses.
 
 4. **Customization Options:**
-   - Settings page to configure Ollama connection details (e.g., API endpoint, authentication).
-   - Options to customize the UI (e.g., theme, font size).
+    - Settings page to configure Ollama connection details (e.g., API endpoint, authentication).
+    - Options to customize the UI (e.g., theme, font size).
 
 ## **Technical Specifications**
 
@@ -53,21 +53,21 @@ obsidian-ollama-chat-plugin/
 ### **Plugin Components**
 
 1. **Main Plugin File (`main.ts`):**
-   - Initializes the plugin.
-   - Registers the chat view and settings.
-   - Handles plugin activation and deactivation.
+    - Initializes the plugin.
+    - Registers the chat view and settings.
+    - Handles plugin activation and deactivation.
 
 2. **Chat View (`ChatView.ts`):**
-   - Renders the chat UI within Obsidian.
-   - Manages user input and displays AI responses.
-   - Handles communication with Ollama API.
+    - Renders the chat UI within Obsidian.
+    - Manages user input and displays AI responses.
+    - Handles communication with Ollama API.
 
 3. **Settings (`Settings.ts`):**
-   - Provides a settings interface for users to configure Ollama connection details.
-   - Allows customization of UI preferences.
+    - Provides a settings interface for users to configure Ollama connection details.
+    - Allows customization of UI preferences.
 
 4. **Styles (`styles.css`):**
-   - Contains CSS for styling the chat interface.
+    - Contains CSS for styling the chat interface.
 
 ### **Implementation Steps**
 
@@ -127,7 +127,10 @@ obsidian-ollama-chat-plugin/
 - **Headers:**
   - `Content-Type: application/json`
 - **Body:**
+  ```json
   {
-    "prompt": "Your user query here",
-    "max_tokens": 150
+     "prompt": "Your user query here",
+     "max_tokens": 150
   }
+  ```
+
